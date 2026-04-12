@@ -22,15 +22,15 @@ public class CartFlowTest {
     void cart_add_view_checkout_happy_path(){
         String base = "http://localhost:" + port;
 
-        ResponseEntity<String> add1 = rest.postForEntity(base +"/cart/add?session=demo&id=1", null, String.class); 
-        ResponseEntity<String> add2 = rest.postForEntity(base +"/cart/add?session=demo&id=2", null, String.class);
+        ResponseEntity<String> add1 = rest.postForEntity(base +"/api/cart/add?session=demo&id=1", null, String.class); 
+        ResponseEntity<String> add2 = rest.postForEntity(base +"/api/cart/add?session=demo&id=2", null, String.class);
         assertThat(add1.getStatusCodeValue()).isEqualTo(200);
         assertThat(add2.getStatusCodeValue()).isEqualTo(200);
 
-        String view = rest.getForObject(base + "/cart/view?session=demo", String.class);
+        String view = rest.getForObject(base + "/api/cart/view?session=demo", String.class);
         assertThat(view).contains("\"size\":2");
 
-        ResponseEntity<String>  checkout = rest.postForEntity(base + "/cart/checkout?session=demo", null, String.class);
+        ResponseEntity<String>  checkout = rest.postForEntity(base + "/api/cart/checkout?session=demo", null, String.class);
         assertThat(checkout.getStatusCodeValue()).isEqualTo(200);
         assertThat(checkout.getBody()).contains("\"status\":\"OK\"");
     }

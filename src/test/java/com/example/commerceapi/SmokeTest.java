@@ -20,7 +20,7 @@ public class SmokeTest {
 
     @Test
     void healthEndPoitnShouldReturnOk(){
-        ResponseEntity<String> resp = rest.getForEntity("http://localhost:" + port +  "/api/health", String.class);
+        ResponseEntity<String> resp = rest.getForEntity("http://localhost:" + port +  "/actuator/health", String.class);
         assertThat(resp.getStatusCodeValue()).isEqualTo(200);
     }
 }
